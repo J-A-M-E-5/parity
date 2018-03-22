@@ -1393,12 +1393,12 @@ impl ImportBlock for Client {
 		use verification::queue::kind::BlockLike;
 		use verification::queue::kind::blocks::Unverified;
 
-		let header = BlockView::new(&bytes).header_view();
+		let number = BlockView::new(&bytes).header_view().number();
 		//let header = Rlp::new(&bytes).val_at::<Header>(0);
 		//let number = header.number();
 		
 		self.set_block_limit(1234);
-		if header.number() > self.block_limit() {
+		if number > self.block_limit() {
 			return Err(BlockImportError::Import(ImportError::PastBlockLimit));
 		}
 
