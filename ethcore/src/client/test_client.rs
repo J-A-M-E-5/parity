@@ -355,6 +355,8 @@ impl TestBlockChainClient {
 	pub fn set_history(&self, h: Option<u64>) {
 		*self.history.write() = h;
 	}
+
+	pub fn set_block_limit(&self, _: BlockNumber) { unimplemented!(); }
 }
 
 pub fn get_temp_state_db() -> StateDB {

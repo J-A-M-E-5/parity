@@ -1978,6 +1978,10 @@ impl BlockChainClient for Client {
 	fn eip86_transition(&self) -> u64 {
 		self.engine().params().eip86_transition
 	}
+
+	fn set_block_limit(&self, limit: BlockNumber) {
+		self.set_block_limit(limit);
+	}
 }
 
 impl ReopenBlock for Client {
