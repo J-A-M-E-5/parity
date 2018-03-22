@@ -224,6 +224,9 @@ pub struct Client {
 	exit_handler: Mutex<Option<Box<Fn(bool, Option<String>) + 'static + Send>>>,
 
 	importer: Importer,
+	
+	/// Download blocks up to this block number
+	block_limit: BlockNumber,
 }
 
 impl Importer {
@@ -764,6 +767,7 @@ impl Client {
 			registrar_address,
 			exit_handler: Mutex::new(None),
 			importer,
+			block_limit: 12345,
 		});
 
 		// prune old states.
@@ -1261,6 +1265,11 @@ impl Client {
 			BlockId::Latest => Some(self.chain.read().best_block_number()),
 		}
 	}
+	
+	fn set_block_limit(&self, limit: BlockNumber) {
+		self.block_limit = limit;
+	}
+
 }
 
 impl snapshot::DatabaseRestore for Client {
