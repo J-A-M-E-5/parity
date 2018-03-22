@@ -854,6 +854,8 @@ impl BlockChainClient for TestBlockChainClient {
 	fn registrar_address(&self) -> Option<Address> { None }
 
 	fn eip86_transition(&self) -> u64 { u64::max_value() }
+
+	fn set_block_limit(&self, _: BlockNumber) { unimplemented!(); }
 }
 
 impl ProvingBlockChainClient for TestBlockChainClient {
