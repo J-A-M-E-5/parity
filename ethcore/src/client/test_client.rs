@@ -357,7 +357,7 @@ impl TestBlockChainClient {
 	}
 
 	/// Gets maximum block number to download.
-	pub fn block_limit(&self) -> BlockNumber) { unimplemented!(); }
+	pub fn block_limit(&self) -> BlockNumber { unimplemented!(); }
 
 	/// Sets maximum block number to download.
 	pub fn set_block_limit(&self, _: BlockNumber) { unimplemented!(); }
