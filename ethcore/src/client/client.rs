@@ -1266,7 +1266,7 @@ impl Client {
 		}
 	}
 	
-	fn set_block_limit(&mut self, limit: BlockNumber) {
+	fn set_block_limit(&self, limit: &BlockNumber) {
 		self.block_limit = limit;
 	}
 
