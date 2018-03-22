@@ -119,5 +119,9 @@ build_rpc_trait! {
 		/// Returns `true` when transaction was removed, `false` if it was not found.
 		#[rpc(name = "parity_removeTransaction")]
 		fn remove_transaction(&self, H256) -> Result<Option<Transaction>>;
+
+		/// Sets maximum block number to download.
+		#[rpc(name = "parity_setBlockLimit")]
+		fn set_block_limit(&self, Trailing<u64>) -> Result<bool>;
 	}
 }

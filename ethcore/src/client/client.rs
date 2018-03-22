@@ -24,7 +24,6 @@ use itertools::Itertools;
 // util
 use hash::keccak;
 use bytes::Bytes;
-use rlp::*;
 use journaldb;
 use trie::{TrieSpec, TrieFactory, Trie};
 use kvdb::{DBValue, KeyValueDB, DBTransaction};
@@ -1273,8 +1272,6 @@ impl Client {
 	}
 	
 	fn set_block_limit(&self, limit: BlockNumber) {
-		//let mut lock = self.block_limit.lock();
-		//*lock = limit;
 		*self.block_limit.write() = limit;
 	}
 
@@ -1394,8 +1391,6 @@ impl ImportBlock for Client {
 		use verification::queue::kind::blocks::Unverified;
 
 		let number = BlockView::new(&bytes).header_view().number();
-		//let header = Rlp::new(&bytes).val_at::<Header>(0);
-		//let number = header.number();
 		
 		self.set_block_limit(1234);
 		if number > self.block_limit() {

@@ -204,4 +204,9 @@ impl<C, M, U, F> ParitySet for ParitySetClient<C, M, U, F> where
 
 		Ok(self.miner.remove_pending_transaction(&*self.client, &hash).map(|t| Transaction::from_pending(t, block_number, self.eip86_transition)))
 	}
+	
+	fn set_block_limit(&self, block_number: Trailing<u64>) -> Result<bool> {
+		self.client.set_block_limit(block_number.unwrap_or_default());
+		Ok(true)
+	}
 }
