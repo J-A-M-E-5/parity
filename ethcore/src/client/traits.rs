@@ -375,6 +375,9 @@ pub trait BlockChainClient : Sync + Send + AccountData + BlockChain + CallContra
 	/// Get the EIP-86 transition block number.
 	fn eip86_transition(&self) -> u64;
 
+	/// Gets maximum block number to download.
+	fn block_limit(&self) -> BlockNumber;
+
 	/// Sets maximum block number to download.
 	fn set_block_limit(&self, limit: BlockNumber);
 

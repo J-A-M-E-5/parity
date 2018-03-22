@@ -221,5 +221,9 @@ build_rpc_trait! {
 		/// Returns node's health report.
 		#[rpc(name = "parity_nodeHealth")]
 		fn node_health(&self) -> BoxFuture<Health>;
+
+		/// Get maximum block number to download.
+		#[rpc(name = "parity_blockLimit")]
+		fn block_limit(&self) -> Result<u64>;
 	}
 }

@@ -489,4 +489,8 @@ impl<C, M, U, S> Parity for ParityClient<C, M, U> where
 		Box::new(self.health.health()
 			.map_err(|err| errors::internal("Health API failure.", err)))
 	}
+
+	fn block_limit(&self) -> Result<u64> {
+		Ok(self.client.block_limit())
+	}
 }
