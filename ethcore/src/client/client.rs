@@ -1379,11 +1379,11 @@ impl ImportBlock for Client {
 		// create unverified block here so the `keccak` calculation can be cached.
 		let unverified = Unverified::new(bytes);
 		
-		let header = Rlp::new(&bytes).val_at::<BlockHeader>(0);
+		let header = Rlp::new(&bytes).val_at::<Header>(0);
 		let number = header.number();
 		
 		if number > 100 {
-			return Err(BlockImportError::Import(ImportError::PastBlocklLimit));
+			return Err(BlockImportError::Import(ImportError::PastBlockLimit));
 		}
 
 		{
