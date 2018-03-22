@@ -17,6 +17,7 @@
 //! Parity-specific rpc interface for operations altering the settings.
 
 use jsonrpc_core::{BoxFuture, Result};
+use jsonrpc_macros::Trailing;
 
 use v1::types::{Bytes, H160, H256, U256, ReleaseInfo, Transaction, LocalDapp};
 

@@ -29,6 +29,7 @@ use updater::{Service as UpdateService};
 
 use jsonrpc_core::{BoxFuture, Result};
 use jsonrpc_core::futures::Future;
+use jsonrpc_macros::Trailing;
 use v1::helpers::dapps::DappsService;
 use v1::helpers::errors;
 use v1::traits::ParitySet;

@@ -27,6 +27,7 @@ use hash::keccak_buffer;
 
 use jsonrpc_core::{Result, BoxFuture};
 use jsonrpc_core::futures::Future;
+use jsonrpc_macros::Trailing;
 use v1::helpers::dapps::DappsService;
 use v1::helpers::errors;
 use v1::traits::ParitySet;
@@ -157,6 +158,10 @@ impl<F: Fetch> ParitySet for ParitySetClient<F> {
 	}
 
 	fn remove_transaction(&self, _hash: H256) -> Result<Option<Transaction>> {
+		Err(errors::light_unimplemented(None))
+	}
+
+	fn set_block_limit(&self, _: Trailing<u64>) -> Result<bool> {
 		Err(errors::light_unimplemented(None))
 	}
 }
