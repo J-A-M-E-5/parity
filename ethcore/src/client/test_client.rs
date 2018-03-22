@@ -356,6 +356,7 @@ impl TestBlockChainClient {
 		*self.history.write() = h;
 	}
 
+	/// Sets maximum block number to download.
 	pub fn set_block_limit(&self, _: BlockNumber) { unimplemented!(); }
 }
 
