@@ -767,7 +767,7 @@ impl Client {
 			registrar_address,
 			exit_handler: Mutex::new(None),
 			importer,
-			block_limit: 12345,
+			block_limit: 0,
 		});
 
 		// prune old states.
@@ -1266,7 +1266,7 @@ impl Client {
 		}
 	}
 	
-	fn set_block_limit(&self, limit: BlockNumber) {
+	fn set_block_limit(mut &self, limit: BlockNumber) {
 		self.block_limit = limit;
 	}
 
@@ -1388,7 +1388,8 @@ impl ImportBlock for Client {
 		let header = Rlp::new(&bytes).val_at::<Header>(0);
 		let number = header.number();
 		
-		if number > 100 {
+		self.set_block_limit(1234);
+		if number > self.block_limit {
 			return Err(BlockImportError::Import(ImportError::PastBlockLimit));
 		}
 
