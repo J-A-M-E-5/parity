@@ -859,6 +859,8 @@ impl BlockChainClient for TestBlockChainClient {
 
 	fn eip86_transition(&self) -> u64 { u64::max_value() }
 
+	fn block_limit(&self) -> BlockNumber { unimplemented!(); }
+	
 	fn set_block_limit(&self, _: BlockNumber) { unimplemented!(); }
 }
 
