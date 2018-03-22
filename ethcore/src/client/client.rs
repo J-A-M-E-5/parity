@@ -1376,9 +1376,6 @@ impl ImportBlock for Client {
 		use verification::queue::kind::BlockLike;
 		use verification::queue::kind::blocks::Unverified;
 
-		// create unverified block here so the `keccak` calculation can be cached.
-		let unverified = Unverified::new(bytes);
-		
 		let header = Rlp::new(&bytes).val_at::<Header>(0);
 		let number = header.number();
 		
@@ -1386,6 +1383,9 @@ impl ImportBlock for Client {
 			return Err(BlockImportError::Import(ImportError::PastBlockLimit));
 		}
 
+		// create unverified block here so the `keccak` calculation can be cached.
+		let unverified = Unverified::new(bytes);
+		
 		{
 			if self.chain.read().is_known(&unverified.hash()) {
 				return Err(BlockImportError::Import(ImportError::AlreadyInChain));
