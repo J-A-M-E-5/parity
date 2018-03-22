@@ -1978,8 +1978,12 @@ impl BlockChainClient for Client {
 		self.engine().params().eip86_transition
 	}
 
+	fn block_limit(&self) -> BlockNumber) {
+		self.block_limit()
+	}
+
 	fn set_block_limit(&self, limit: BlockNumber) {
-		self.set_block_limit(limit);
+		self.set_block_limit(limit)
 	}
 }
 
