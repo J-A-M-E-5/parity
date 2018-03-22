@@ -226,7 +226,7 @@ pub struct Client {
 	importer: Importer,
 	
 	/// Download blocks up to this block number
-	block_limit: BlockNumber,
+	block_limit: RwLock<BlockNumber>,
 }
 
 impl Importer {
@@ -737,6 +737,8 @@ impl Client {
 		let awake = match config.mode { Mode::Dark(..) | Mode::Off => false, _ => true };
 
 		let importer = Importer::new(&config, engine.clone(), message_channel.clone(), miner)?;
+		
+		let block_limit = RwLock::new(0);
 
 		let registrar_address = engine.additional_params().get("registrar").and_then(|s| Address::from_str(s).ok());
 		if let Some(ref addr) = registrar_address {
@@ -767,7 +769,7 @@ impl Client {
 			registrar_address,
 			exit_handler: Mutex::new(None),
 			importer,
-			block_limit: 0,
+			block_limit: block_limit,
 		});
 
 		// prune old states.
@@ -1266,8 +1268,14 @@ impl Client {
 		}
 	}
 	
-	fn set_block_limit(&self, limit: &BlockNumber) {
-		self.block_limit = limit;
+	fn block_limit(&self) -> BlockNumber {
+		*self.block_limit.read()
+	}
+	
+	fn set_block_limit(&self, limit: BlockNumber) {
+		//let mut lock = self.block_limit.lock();
+		//*lock = limit;
+		*self.block_limit.write() = limit;
 	}
 
 }
@@ -1389,7 +1397,7 @@ impl ImportBlock for Client {
 		let number = header.number();
 		
 		self.set_block_limit(1234);
-		if number > self.block_limit {
+		if number > self.block_limit() {
 			return Err(BlockImportError::Import(ImportError::PastBlockLimit));
 		}
 
