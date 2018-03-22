@@ -24,6 +24,7 @@ use itertools::Itertools;
 // util
 use hash::keccak;
 use bytes::Bytes;
+use rlp::*;
 use journaldb;
 use trie::{TrieSpec, TrieFactory, Trie};
 use kvdb::{DBValue, KeyValueDB, DBTransaction};
