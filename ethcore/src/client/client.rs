@@ -1392,7 +1392,6 @@ impl ImportBlock for Client {
 
 		let number = BlockView::new(&bytes).header_view().number();
 		
-		self.set_block_limit(1234);
 		if number > self.block_limit() {
 			return Err(BlockImportError::Import(ImportError::PastBlockLimit));
 		}
