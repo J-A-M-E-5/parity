@@ -153,6 +153,8 @@ pub enum ImportError {
 	AlreadyQueued,
 	/// Already marked as bad from a previous import (could mean parent is bad).
 	KnownBad,
+	/// Block number is past limit we are downloading up to.
+	PastBlockLimit,
 }
 
 impl fmt::Display for ImportError {
@@ -161,6 +163,7 @@ impl fmt::Display for ImportError {
 			ImportError::AlreadyInChain => "block already in chain",
 			ImportError::AlreadyQueued => "block already in the block queue",
 			ImportError::KnownBad => "block known to be bad",
+			ImportError::PastBlockLimit => "block is past download limit",
 		};
 
 		f.write_fmt(format_args!("Block import error ({})", msg))
